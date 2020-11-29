@@ -8,12 +8,8 @@ int main() {
 
     if (setuid(2) == -1) {
 
-        cout << "Numero de error: ";
-        cout << errno;
-        cout << '\n';
-        cout << "Error: ";
-        cout << strerror(errno);
-        cout << '\n';
+        cout << "Numero de error: " << errno << '\n';
+        cout << "Error: " << strerror(errno) << '\n';
 
         return -1;
 
