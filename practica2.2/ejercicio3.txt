@@ -1,0 +1,5 @@
+Para fijar los permisos rw-r--r-x en el fichero usaremos los siguientes
+comandos, uno usando la notación octal y otro usando la notación simbólica:
+
+    & chmod 645 fichero
+    & chmod u+rw-x,g+r-wx,o+rx-w fichero
