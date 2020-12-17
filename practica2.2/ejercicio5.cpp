@@ -4,7 +4,7 @@ using namespace std;
 
 int main() {
 
-    if (creat("fichero",S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH | S_IXOTH) == -1) {
+    if (open("fichero", O_CREAT, S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH | S_IXOTH) == -1) {
 
         perror("Error");
 
