@@ -1,31 +1,31 @@
 #include <iostream>
 #include <string>
-#include <fstream>
+#include <stdio.h>
+#include <fcntl.h>
+#include <sys/stat.h>
+#include <unistd.h>
 using namespace std;
 
 int main() {
 
     string pTemp;
-    const char* path;
-    ofstream file;
+    int newFd;
 
     cin >> pTemp;
 
-    file.open(pTemp.c_str());
+    if ((newFd = open(pTemp.c_str(), O_CREAT | O_WRONLY, 0777)) < 0) {
 
-    if (!file.is_open()) {
-
-        cout << "No se pudo abrir el fichero\n";
+        perror("Error");
 
         return -1;
 
     }
 
+    dup2(newFd, 1);
+
     for (int i = 1; i <= 5; ++i)
-        file << "Linea " << i << '\n';
-
-    file.close();
-
+        cout << "Linea " << i << '\n';
+    
     return 0;
 
 }
