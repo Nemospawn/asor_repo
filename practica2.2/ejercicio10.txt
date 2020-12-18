@@ -1,0 +1,15 @@
+I-nodo de los ficheros originales:
+    fichero -> 17985922
+    directorio -> 33976197
+
+I-nodo de los enlaces simbólicos:
+    f_sim -> 17985925
+    d_sim -> 17985924
+
+I-nodo del enlace rígido (Sólo del fichero. No se pueden crear enlaces rígidos a directorios):
+    f_rig -> 17985922
+
+Al borrar un enlace rígido disminuirá el número de enlaces del otro fichero. Por otro lado, al
+borrar un enlace simbólico no ocurrirá nada, pero si borramos el fichero original, el contenido
+del enlace simbólico desaperecerá y pasará a ser de solo lectura, pues ya no se podrá mostrar
+o modificar el contenido del fichero al que estaba enlazado.
