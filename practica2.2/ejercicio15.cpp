@@ -61,7 +61,7 @@ int main() {
 
     strftime(hora, SIZE, "%H:%M", info);
 
-    write(newFd, hora, sizeof(hora));
+    write(newFd, hora, 5);
 
     sleep(3);
 
