@@ -10,9 +10,9 @@ using namespace std;
 
 int main() {
 
-    struct stat info;
+    struct stat f_info, l_info;
 
-    if (stat("fichero", &info) == -1) {
+    if (stat("fichero", &f_info) == -1) {
 
         perror("Error");
 
@@ -20,28 +20,39 @@ int main() {
 
     }
 
-    cout << "Numero major: " << major(info.st_dev) << '\n';
-    cout << "Numero minor: " << minor(info.st_dev) << '\n';
-    cout << "Numero de i-nodo: " << info.st_ino << '\n';
+    if (lstat("fichero", &l_info) == -1) {
+
+        perror("Error");
+
+        return -1;
+
+    }
+
+    cout << "Numero major: " << major(f_info.st_dev) << '\n';
+    cout << "Numero minor: " << minor(f_info.st_dev) << '\n';
+    cout << "Numero de i-nodo: " << f_info.st_ino << '\n';
     cout << "Tipo de fichero: ";
 
-    switch (info.st_mode & S_IFMT) {
-
-        case S_IFDIR:
-        cout << "Directorio\n";
-        break;
-
-        case S_IFLNK:
+    if (S_ISLNK(l_info.st_mode))
         cout << "Enlace simbolico\n";
-        break;
 
-        case S_IFREG:
-        cout << "Fichero ordinario\n";
-        break;
+    else {
 
-        default:
-        cout << "Otro\n";
-        break;
+        switch (f_info.st_mode & S_IFMT) {
+
+            case S_IFDIR:
+            cout << "Directorio\n";
+            break;
+
+            case S_IFREG:
+            cout << "Fichero ordinario\n";
+            break;
+
+            default:
+            cout << "Otro\n";
+            break;
+
+        }
 
     }
 
