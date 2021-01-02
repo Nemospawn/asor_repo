@@ -1,0 +1,2 @@
+La prioridad del programa es de 12 y la política de planificación SCHED_FIFO.
+Se puede decir que el programa hereda los atributos de planificación.
