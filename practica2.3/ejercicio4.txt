@@ -1,0 +1,4 @@
+El identificador que se comparte es únicamente el identificador de sesión.
+
+Cuando se crea un nuevo proceso el identificador de grupo de procesos que
+se establece es el mismo que el identificador del proceso.
