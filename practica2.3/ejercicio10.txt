@@ -1,0 +1,4 @@
+Según cual sea la señal enviada, la salida será la correspondiente. Por ejemplo, al enviar 
+la señal SIGILL la salida será 'Illegal instruction (core dumped)'. Si, en su lugar,
+enviásemos la señal SIGSGEV, la salida sería 'Segmentation fault (core dumped)'. En
+ambos casos, el proceso termina y se provoca un volcado de memoria.
