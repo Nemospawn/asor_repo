@@ -11,7 +11,7 @@ void sigint_handler(int signal){
 
 }
 
-void sigtspt_handler(int signal) {
+void sigtstp_handler(int signal) {
 
     ++sigtstp_cont;
 
@@ -22,7 +22,7 @@ int main() {
     struct sigaction sigint_act, sigtstp_act;
 
     sigint_act.sa_handler = sigint_handler;
-    sigtstp_act.sa_handler = sigtspt_handler;
+    sigtstp_act.sa_handler = sigtstp_handler;
 
     sigemptyset(&sigint_act.sa_mask);
     sigemptyset(&sigtstp_act.sa_mask);
