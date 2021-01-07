@@ -12,7 +12,7 @@ int main() {
 
     string in;
     char out[SIZE], buff[SIZE];
-    int p_h[2], h_p[2], cont = 1;
+    int p_h[2], h_p[2], cont = 0;
     pid_t pid;
 
     if (pipe(p_h) == -1 || pipe(h_p) == -1) {
@@ -67,9 +67,9 @@ int main() {
 
         while (strcmp(buff, "q") != 0) {
 
-            write(p_h[1], in.c_str(), sizeof(in.c_str()));
+            write(p_h[1], in.c_str(), strlen(in.c_str()));
 
-            select(sizeof(p_h) + sizeof(h_p) + 1, &setfd, NULL, NULL, NULL);
+            select(p_h[1] + h_p[1] + 1, &setfd, NULL, NULL, NULL);
 
             read(h_p[0], &buff, sizeof(buff));
 
