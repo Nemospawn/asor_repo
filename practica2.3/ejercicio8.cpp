@@ -5,8 +5,6 @@
 #include <fcntl.h>
 using namespace std;
 
-const int SIZE = 1000;
-
 int main() {
 
     pid_t pid;
