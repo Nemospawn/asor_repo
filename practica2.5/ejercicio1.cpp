@@ -11,7 +11,7 @@ int main() {
 
     int info;
     string hostname;
-    struct addrinfo hints, *result, *rp, *hostinfo;
+    struct addrinfo hints, *result, *rp;
     char host[SIZE];
 
     cin >> hostname;
