@@ -56,65 +56,70 @@ int main() {
 
     }
 
-    do {
+    while (1) {
 
         n = recvfrom(sd, cm, SIZE, 0, (struct sockaddr *)&addr, &addrlen);
 
         cm[n] = '\0';
 
-        getnameinfo((struct sockaddr *) &addr, addrlen, host, NI_MAXHOST,
+        getnameinfo((struct sockaddr *)&addr, addrlen, host, NI_MAXHOST, 
             serv, NI_MAXSERV, NI_NUMERICHOST|NI_NUMERICSERV);
 
         cout << n << " bytes de " << host << ":" << serv << '\n';
     
-        if (time(&t) == -1) {
-
-            perror("Error");
-
-            return -1;
-
-        }
-    
-        tinfo = localtime(&t);
-
-        if (tinfo == NULL) {
-
-            cout << "An error has occurred\n";
-
-            return -1;
-
-        }
-
-        if (strcmp(cm, "t\n") == 0) {
-
-            m = strftime(tbuff, SIZE, "%H:%M:%S %p", tinfo);
-
-            sendto(sd, tbuff, m, 0, (struct sockaddr *)&addr, addrlen);
-
-        }
+        if (strcmp(cm, "q\n") == 0)
+            break;
 
         else {
 
-            if (strcmp(cm, "d\n") == 0) {
+            if (time(&t) == -1) {
 
-                m = strftime(dbuff, SIZE, "%d-%m-%Y", tinfo);
+                perror("Error");
 
-                sendto(sd, dbuff, m, 0, (struct sockaddr *)&addr, addrlen);
+                return -1;
+
+            }
+        
+            tinfo = localtime(&t);
+
+            if (tinfo == NULL) {
+
+                cout << "An error has occurred\n";
+
+                return -1;
+
+            }
+
+            if (strcmp(cm, "t\n") == 0) {
+
+                m = strftime(tbuff, SIZE, "%H:%M:%S %p", tinfo);
+
+                sendto(sd, tbuff, m, 0, (struct sockaddr *)&addr, addrlen);
 
             }
 
             else {
 
-                if (strcmp(cm, "q\n") != 0)
-                    cout << "Comando no soportado " << cm;
+                if (strcmp(cm, "d\n") == 0) {
+
+                    m = strftime(dbuff, SIZE, "%d-%m-%Y", tinfo);
+
+                    sendto(sd, dbuff, m, 0, (struct sockaddr *)&addr, addrlen);
+
+                }
+
+                else {
+
+                    if (strcmp(cm, "q\n") != 0)
+                        cout << "Comando no soportado " << cm;
+
+                }
 
             }
 
         }
 
     }
-
-    while (strcmp(cm, "q\n") != 0);
 
     cout << "Saliendo...\n";
 
