@@ -13,7 +13,7 @@ const int SIZE = 1000;
 int main() {
 
     struct sockaddr_storage addr;
-    struct addrinfo hints, *servaddr, *rp;
+    struct addrinfo hints, *servaddr;
     struct tm *tinfo;
     socklen_t addrlen = sizeof(addr);
     time_t t;
