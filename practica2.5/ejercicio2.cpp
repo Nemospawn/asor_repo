@@ -121,6 +121,8 @@ int main() {
 
     }
 
+    sendto(sd, "", 0, 0, (struct sockaddr *)&addr, addrlen);
+
     cout << "Saliendo...\n";
 
     close(sd);
