@@ -13,7 +13,7 @@ const int SIZE = 1000;
 int main() {
 
     struct addrinfo hints, *servaddr;
-    int info, sd;
+    int info, sd, n;
     string hostname, puerto, cm;
     char buff[SIZE];
 
@@ -43,9 +43,13 @@ int main() {
 
     }
 
-    sendto(sd, cm.c_str(), sizeof(cm.c_str()), 0, (struct sockaddr *)&servaddr->ai_addr, servaddr->ai_addrlen);
+    cm += '\n';
 
-    recvfrom(sd, buff, SIZE, 0, (struct sockaddr *)&servaddr->ai_addr, &servaddr->ai_addrlen);
+    sendto(sd, cm.c_str(), cm.length(), 0, (struct sockaddr *)servaddr->ai_addr, servaddr->ai_addrlen);
+
+    n = recvfrom(sd, buff, SIZE, 0, (struct sockaddr *)servaddr->ai_addr, &servaddr->ai_addrlen);
+
+    buff[n] = '\0';
 
     cout << buff << '\n';
 
